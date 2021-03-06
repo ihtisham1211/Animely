@@ -1,0 +1,25 @@
+body {
+  font-family: "Baloo Tamma 2",Montserrat,"Open Sans",Lato,Tahoma;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  position: relative;
+
+margin: 0;
+background-color: #161616;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+* {
+  outline: 0;
+}
+html{
+  height: 100%;
+  position: relative;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
