@@ -11,6 +11,7 @@ const BoxItemBody = styled.li`
   width: 180px;
   height: 300px;
   margin:0.5rem;
+  border-radius: 20px;
 `;
 const ItemTitle = styled.a`
   &:hover {

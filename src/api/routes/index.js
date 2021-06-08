@@ -21,6 +21,11 @@ router.get('/AnimeEpisodeHandler/:id' , (req , res) =>{
         anime
       });
     })
+    .catch(() => {
+      res.status(404).json({
+        "error": "Episode Not Found"
+      });
+    })
 });
 
 router.get('/RecentReleaseEpisodes/:page' , (req , res) =>{
@@ -103,5 +108,16 @@ router.get('/Genre/:genre/:page' , (req , res) =>{
     })
 });
 
+router.get('/DecodeVidstreamingIframeURL/*' , (req , res) =>{
+  const url = req.originalUrl;
+  const urlParts = url.split('/');
+  const _url = `${urlParts[4].concat('/'+ urlParts[5])}`.trim();
+  api.decodeVidstreamingIframeURL(_url)
+    .then(videos =>{
+      res.status(200).json({
+        videos
+      });
+    })
+});
 
 module.exports = router;

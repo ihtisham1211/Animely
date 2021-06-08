@@ -1,12 +1,12 @@
-const fetch = require('node-fetch');
+const axios = require('axios');
 const cloudscraper = require('cloudscraper');
 const cheerio = require('cheerio');
 const url = require('./urls');
 
 
 const ongoingSeries = async() =>{
-  const res = await fetch(`${url.BASE_URL}`);
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}`);
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
 
@@ -32,8 +32,8 @@ const ongoingSeries = async() =>{
 };
 
 const search = async(query) =>{
-  const res = await fetch(`${url.BASE_URL}/search.html?keyword=${query}`);
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}/search.html?keyword=${query}`);
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
 
@@ -57,8 +57,8 @@ const search = async(query) =>{
 };
 
 const genres = async(genre , page) =>{
-  const res = await fetch(`${url.BASE_URL}/genre/${genre}?page=${page}`);
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}/genre/${genre}?page=${page}`);
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
 
@@ -82,8 +82,8 @@ const genres = async(genre , page) =>{
 };
 
 const alphabetList = async(letter , page) =>{
-  const res = await fetch(`${url.BASE_URL}/anime-list-${letter}?page=${page}`)
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}/anime-list-${letter}?page=${page}`)
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
 
@@ -107,8 +107,8 @@ const alphabetList = async(letter , page) =>{
 };
 
 const newSeasons = async(page) =>{
-  const res = await fetch(`${url.BASE_URL}/new-season.html?page=${page}`)
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}/new-season.html?page=${page}`)
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
   
@@ -132,8 +132,8 @@ const newSeasons = async(page) =>{
 };
 
 const movies = async(page) =>{
-  const res = await fetch(`${url.BASE_URL}/anime-movies.html?page=${page}`);
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}/anime-movies.html?page=${page}`);
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
   
@@ -157,8 +157,8 @@ const movies = async(page) =>{
 };
 
 const popular = async(page) =>{
-  const res = await fetch(`${url.BASE_URL}/popular.html?page=${page}`);
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}/popular.html?page=${page}`);
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
   
@@ -182,8 +182,8 @@ const popular = async(page) =>{
 };
 
 const recentlyAddedSeries = async() =>{
-  const res = await fetch(`${url.BASE_URL}`);
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}`);
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
 
@@ -207,8 +207,8 @@ const recentlyAddedSeries = async() =>{
 };
 
 const recentReleaseEpisodes = async(page) =>{
-  const res = await fetch(`${url.BASE_URL}/?page=${page}`);
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}/?page=${page}`);
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
 
@@ -235,8 +235,8 @@ const recentReleaseEpisodes = async(page) =>{
 };
 
 const animeEpisodeHandler = async(id) =>{
-  const res = await fetch(`${url.BASE_URL}/${id}`);
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}/${id}`);
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
 
@@ -274,8 +274,8 @@ const animeEpisodeHandler = async(id) =>{
 }
 
 const animeContentHandler = async(id) =>{
-  const res = await fetch(`${url.BASE_URL}${id}`);
-  const body = await res.text();
+  const res = await axios.get(`${url.BASE_URL}${id}`);
+  const body = await res.data;
   const $ = cheerio.load(body);
   const promises = [];
 
@@ -293,7 +293,11 @@ const animeContentHandler = async(id) =>{
     const status = $element.find('div.anime_info_body_bg p.type').eq(4).text().replace('Status:' , '').trim();
     const otherName = $element.find('div.anime_info_body_bg p.type').eq(5).text().replace('Other name:' , '').trim();
     const liTotal = $('div.anime_video_body ul#episode_page li').length;
-    const totalEpisodes = parseInt($('div.anime_video_body ul#episode_page li').eq(liTotal - 1).find('a').text().split('-')[1] , 10);
+    var totalEpisodes = parseInt($('div.anime_video_body ul#episode_page li').eq(liTotal - 1).find('a').text().split('-')[1] , 10);
+    if(!totalEpisodes){
+       totalEpisodes = parseInt($('div.anime_video_body ul#episode_page li').eq(liTotal - 1).find('a').text() , 10);
+    }
+    
     const episodes = Array.from({length: totalEpisodes} , (v , k) =>{
       const animeId = `${id}-episode-${k + 1}`.slice(10);
       return{

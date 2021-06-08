@@ -15,12 +15,12 @@ const ItemTitle = styled.span`
   }
   color: #b7c0c8;
   display: block;
-  line-height: 1.1rem;
+  line-height: 1.3rem;
   font-size: 1.25rem;
   font-weight: normal;
   transition: all 0.15s ease-in-out 0s;
   text-overflow: ellipsis;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
 `;
 
@@ -40,7 +40,6 @@ const TnS = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-around;
 `;
 const TnSK = styled.div`
   margin-left: 0.5rem;

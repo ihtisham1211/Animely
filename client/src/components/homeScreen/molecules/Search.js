@@ -15,6 +15,7 @@ const BackgroundImg = styled.img`
   z-index: 0;
   width: 100%;
   margin-bottom: 3rem;
+  border-radius: 20px;
 `;
 
 const InputContainer = styled.div`
@@ -24,7 +25,6 @@ const InputContainer = styled.div`
   top: 75%;
   height: 20%;
   width: 50%;
-  background-color: pink;
   font-size: 1.5em;
 `;
 
@@ -35,6 +35,8 @@ const SearchInput = styled.input`
   outline: 0;
   padding: 0.625rem 1.5rem 0.625rem 1.5rem;
   font-size: 1.2rem;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 `;
 const SearchIcon = styled.button`
   background: #f8f9fa;
@@ -42,6 +44,8 @@ const SearchIcon = styled.button`
   height: 100%;
   font-size: 1.2rem;
   align-self: center;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 `;
 
 export const Search = (props) => {

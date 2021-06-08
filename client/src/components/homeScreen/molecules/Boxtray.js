@@ -10,6 +10,7 @@ const BoxtrayBody = styled.ul`
   flex-flow: wrap;
   padding: 0;
   margin: 0;
+  max-width:1200px
 `;
 
 export const Boxtray = ({ OngoingSeries }) => {
@@ -17,13 +18,13 @@ export const Boxtray = ({ OngoingSeries }) => {
     <>
       {OngoingSeries.length !== 0 ? (
         <BoxtrayBody>
-          {OngoingSeries.slice(0, 14).map((anime) => {
+          {OngoingSeries.slice(0, 12).map((anime) => {
             return <BoxItem key={uuid()} title={anime.title} img={anime.img} />;
           })}
         </BoxtrayBody>
       ) : (
         <BoxtrayBody>
-          {[...new Array(14)].map((element, i) => {
+          {[...new Array(12)].map((element, i) => {
             return <BoxItem key={uuid()} title={null} img={null} />;
           })}
         </BoxtrayBody>

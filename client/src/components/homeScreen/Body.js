@@ -15,7 +15,7 @@ import {
 import { setloading } from "../../actions/options";
 
 const BodysBody = styled.div`
-  padding: 1rem 0 1rem 0;
+  max-width: 1200px;
 `;
 const Title = styled.h1`
   font-family: "Baloo Tamma 2", Montserrat, "Open Sans", Lato, Tahoma;
